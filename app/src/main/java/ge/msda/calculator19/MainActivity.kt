@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     private var sOperand: Double = 0.0
     private var operation: String = ""
     private var opIsUsed: Boolean = false
+    private var deleteResult: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,24 +31,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun numberClick(view: View) {
+        if (deleteResult) {
+            resultTextView.text = ""
+            deleteResult = false
+        }
+            if (view is TextView) {
+                var result: String = resultTextView.text.toString()
+                val number: String = view.text.toString()
 
-        if (view is TextView) {
+                if (result == "0") {
+                    result = ""
 
-            var result: String = resultTextView.text.toString()
-            val number: String = view.text.toString()
-
-            if (result == "0") {
-                result = ""
-
-                resultTextView.text = result + number
-            } else if (number == ".") {
-                if (!resultTextView.text.toString().contains('.')) {
+                    resultTextView.text = result + number
+                } else if (number == ".") {
+                    if (!resultTextView.text.toString().contains('.')) {
+                        resultTextView.text = result + number
+                    }
+                } else {
                     resultTextView.text = result + number
                 }
-            } else {
-                resultTextView.text = result + number
             }
-        }
     }
 
     fun operationClick(view: View) {
@@ -62,6 +65,7 @@ class MainActivity : AppCompatActivity() {
 
             operation = view.text.toString()
 
+            opIsUsed = true
         }
     }
 
@@ -85,5 +89,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         opIsUsed = false
+        fOperand = 0.0
+        sOperand = 0.0
+        deleteResult = true
+    }
+    fun deleteClick (view: View) {
+        val len = resultTextView.text.length;
+
+        if (len > 1) {
+            resultTextView.text = resultTextView.text.dropLast(1)
+        } else if (len == 1) {
+            resultTextView.text = "0"
+        }
     }
 }

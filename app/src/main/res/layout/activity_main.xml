@@ -221,6 +221,7 @@
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:onClick="numberClick"
                 android:text="."
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -240,6 +241,7 @@
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:onClick="deleteClick"
                 android:text="DEL"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
